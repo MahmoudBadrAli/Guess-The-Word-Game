@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Main game stylesheet -->
+    <link rel="stylesheet" href="guess.css" />
+
+    <!-- SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Alfa Slab One - Used for the main game title (h1) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Updock - Used in the footer developer name -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Updock&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Quicksand - Used in instructions, buttons, and inputs -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Inter - Used in the footer's main text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <h1></h1>
+    <div class="guess-game">
+      <div class="game-area">
+        <div class="inputs"></div>
+        <div class="control">
+          <button class="check">Check Word</button>
+          <button class="hints"><span></span> Hint</button>
+        </div>
+      </div>
+      <div class="key-colors">
+        <h2>
+          <span class="key">Key</span> <span class="first">Co</span
+          ><span class="second">lo</span><span class="third">rs</span>
+        </h2>
+        <div class="key-color">
+          <div class="key in-place"></div>
+          <div class="key-text">Letter Is Correct and In Place</div>
+        </div>
+        <div class="key-color">
+          <div class="key not-in-place"></div>
+          <div class="key-text">Letter Is Correct but Not In Place</div>
+        </div>
+        <div class="key-color">
+          <div class="key no"></div>
+          <div class="key-text">Letter Is Wrong</div>
+        </div>
+        <div class="message"></div>
+        <div class="after-round">
+          <button class="reset choose-level">Choose another level</button>
+          <button class="reset restart-same">Reset to the same level</button>
+        </div>
+      </div>
+    </div>
+    <footer></footer>
+    <script src="guess.js"></script>
+  </body>
+</html>

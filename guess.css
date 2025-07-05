@@ -1,0 +1,625 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #f44336;
+}
+
+body {
+  margin: 0;
+  background-color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 80px;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin: 0 0 50px;
+  background-color: white;
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--primary-color);
+}
+
+.guess-game {
+  text-align: center;
+  width: 1000px;
+  margin: -25px auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  .game-area {
+    .inputs span {
+      font-family: "Quicksand", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+    }
+    .inputs {
+      > div {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          font-size: 30px;
+          margin-right: 15px;
+          font-weight: bold;
+        }
+      }
+      .disabled-inputs {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      input {
+        margin: 0 5px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 50px;
+        caret-color: var(--primary-color);
+        background-color: white;
+        border: none;
+        border-bottom: 3px solid #333;
+        &:focus {
+          outline-color: #ccc;
+        }
+        &.yes-in-place {
+          background-color: #f89e13;
+          border: #f89e13;
+          color: white;
+        }
+        &.not-in-place {
+          background-color: #18ba89;
+          border: #18ba89;
+          color: white;
+        }
+        &.no {
+          background-color: #27303f;
+          border: #27303f;
+          color: white;
+        }
+      }
+    }
+    .control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+      margin: 30px auto;
+      gap: 10px;
+      .check {
+        background-color: var(--primary-color);
+        flex: 1;
+      }
+      .hints {
+        background-color: #009688;
+        width: fit-content;
+      }
+      button {
+        border: none;
+        font-size: 25px;
+        padding: 15px 20px;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        transition: 0.3s;
+      }
+      button:disabled {
+        background-color: black;
+        opacity: 0.4;
+        cursor: no-drop;
+      }
+      button:hover {
+        opacity: 0.7;
+        transform: translateY(-2px);
+      }
+      button:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+  .key-colors {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    h2 {
+      font-size: 32px;
+    }
+    h2 span.key {
+      color: var(--primary-color);
+    }
+    h2 span.first {
+      color: #f89e13;
+    }
+    h2 span.second {
+      color: #18ba89;
+    }
+    h2 span.third {
+      color: #27303f;
+    }
+    .key-color {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background-color: white;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      .key {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        &.in-place {
+          background-color: #f89e13;
+        }
+        &.not-in-place {
+          background-color: #18ba89;
+        }
+        &.no {
+          background-color: #27303f;
+        }
+      }
+      .key-text {
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  padding-top: 20px;
+  span {
+    font-weight: bold;
+    display: block;
+    font-size: 50px;
+    color: var(--primary-color);
+    text-transform: capitalize;
+    /*  */
+    margin-bottom: 30px;
+    /*  */
+  }
+  p {
+    margin-top: -8px;
+  }
+}
+
+.after-round {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.reset {
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.reset:hover {
+  background-color: #5c6bc0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.reset:active {
+  background-color: #303f9f;
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  a {
+    text-decoration: none;
+    span {
+      color: var(--primary-color);
+      font-weight: bold;
+      font-family: "Updock", cursive;
+      font-weight: 400;
+      font-size: 24px;
+      font-style: normal;
+      white-space: nowrap;
+    }
+  }
+}
+
+/* First, fix the nested CSS that's breaking your layout */
+.guess-game .game-area .inputs span {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.guess-game .game-area .inputs > div {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guess-game .game-area .inputs > div span {
+  font-size: 30px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.guess-game .game-area .inputs .disabled-inputs {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.guess-game .game-area .inputs input {
+  margin: 0 5px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 50px;
+  caret-color: var(--primary-color);
+  background-color: white;
+  border: none;
+  border-bottom: 3px solid #333;
+}
+
+.guess-game .game-area .inputs input:focus {
+  outline-color: #ccc;
+}
+
+.guess-game .game-area .inputs input.yes-in-place {
+  background-color: #f89e13;
+  border: #f89e13;
+  color: white;
+}
+
+.guess-game .game-area .inputs input.not-in-place {
+  background-color: #18ba89;
+  border: #18ba89;
+  color: white;
+}
+
+.guess-game .game-area .inputs input.no {
+  background-color: #27303f;
+  border: #27303f;
+  color: white;
+}
+
+.guess-game .game-area .control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  margin: 30px auto;
+  gap: 10px;
+}
+
+.guess-game .game-area .control .check {
+  background-color: var(--primary-color);
+  flex: 1;
+}
+
+.guess-game .game-area .control .hints {
+  background-color: #009688;
+  width: fit-content;
+}
+
+.guess-game .game-area .control button {
+  border: none;
+  font-size: 25px;
+  padding: 15px 20px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.guess-game .game-area .control button:disabled {
+  background-color: black;
+  opacity: 0.4;
+  cursor: no-drop;
+}
+
+/* Now the responsive media queries */
+@media (max-width: 1024px) {
+  .guess-game {
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .guess-game .game-area .control {
+    width: 100%;
+    max-width: 400px;
+  }
+  .game-area {
+    margin-bottom: -40px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .guess-game {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .guess-game .game-area .inputs > div span {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .guess-game .game-area .inputs input {
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+    margin: 0 3px;
+  }
+
+  .guess-game .game-area .control {
+    width: 100%;
+    max-width: 300px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .guess-game .game-area .control button {
+    font-size: 18px;
+    padding: 12px 16px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .guess-game .game-area .inputs > div span {
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .guess-game .game-area .inputs input {
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+    margin: 0 2px;
+  }
+
+  .guess-game .game-area .control button {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+}
+
+.guess-game .game-area .inputs > div {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.guess-game .game-area .inputs input {
+  margin: 0 2px;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  min-width: 30px;
+}
+
+.guess-game .game-area .inputs > div:has(input:nth-child(12)) input {
+  width: 35px;
+  height: 35px;
+  font-size: 28px;
+  margin: 0 1px;
+}
+
+.guess-game .game-area .inputs > div:has(input:nth-child(17)) input {
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  margin: 0 1px;
+}
+
+.guess-game .game-area .inputs > div span {
+  font-size: 24px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+}
+
+.guess-game .game-area {
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .guess-game .game-area .inputs > div {
+    /* flex-direction: column; */
+    align-items: center;
+    gap: 8px;
+  }
+
+  .guess-game .game-area .inputs > div span {
+    margin-right: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  .guess-game .game-area .inputs input {
+    width: 35px;
+    height: 35px;
+    font-size: 28px;
+    margin: 0 1px;
+  }
+
+  .guess-game .game-area .inputs > div:has(input:nth-child(12)) input {
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+    margin: 0 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .guess-game .game-area .inputs > div {
+    padding: 0 10px;
+  }
+
+  .guess-game .game-area .inputs input {
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    margin: 0 1px;
+  }
+
+  .guess-game .game-area .inputs > div:has(input:nth-child(10)) input {
+    width: 25px;
+    height: 25px;
+    font-size: 18px;
+    margin: 0 0.5px;
+  }
+
+  .guess-game .game-area .inputs > div span {
+    font-size: 18px;
+  }
+}
+
+.guess-game {
+  width: min(95vw, 1200px);
+  margin: -25px auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .guess-game {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    gap: 30px;
+  }
+
+  .guess-game .key-colors {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* Custom Difficulty Buttons */
+.custom-difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.diff-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.diff-btn.very-easy {
+  background-color: #ccc;
+  color: black;
+}
+.diff-btn.easy {
+  background-color: #90caf9;
+  color: black;
+}
+.diff-btn.medium {
+  background-color: #2196f3;
+  color: white;
+}
+.diff-btn.hard {
+  background-color: #f44336;
+  color: white;
+}
+.diff-btn.very-hard {
+  background-color: #b71c1c;
+  color: white;
+}
+.diff-btn.death {
+  background-color: black;
+  color: red;
+  font-size: 20px;
+}
+.diff-btn.very-easy {
+  background-color: #c8e6c9; /* Light green */
+  color: #2e7d32;
+}
+
+.diff-btn.easy {
+  background-color: #a5d6a7; /* Soft green */
+  color: #1b5e20;
+}
+
+.diff-btn.medium {
+  background-color: #fff176; /* Warm yellow */
+  color: #795548;
+}
+
+.diff-btn.hard {
+  background-color: #ff7043; /* Orange-red */
+  color: white;
+}
+
+.diff-btn.very-hard {
+  background-color: #d32f2f; /* Strong red */
+  color: white;
+}
+
+.diff-btn.death {
+  background-color: #212121; /* Dark gray */
+  color: #ff1744; /* Vivid red */
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.diff-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
