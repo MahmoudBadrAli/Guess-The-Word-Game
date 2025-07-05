@@ -115,12 +115,6 @@ Swal.fire({
       originalHints = numberOfHints;
       document.querySelector(".hints span").innerHTML = numberOfHints;
 
-      // Remove the console log for the word to guess in production
-      console.log(`Word to Guess: ${wordToGuess}`);
-      console.log(`Difficulty Level: ${selectedDifficulty}`);
-      console.log(`Number Of Letters: ${wordToGuess.length}`);
-      // Do Not Forget To Remove This Line In Production
-
       const cefrLevel = getCEFRLevelText(selectedDifficulty);
 
       Swal.fire({
@@ -737,12 +731,6 @@ restartSame.addEventListener("click", () => {
 
   // Generate new input fields
   generateInput();
-
-  // Remove This Console Log In Production
-  console.log(`Selected Difficulty: ${selectedDifficulty}`);
-  console.log(`New Word: ${wordToGuess}`);
-  console.log(`Number Of Letters: ${wordToGuess.length}`);
-  // Do not Forget To Remove This Line In Production
 
   restartSame.style.display = "none";
 });
